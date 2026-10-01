@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>高雄市國小田徑錦標賽</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" id="comp-info"><p class="muted">載入中…</p></section>
+
+    <div class="grid" id="stats"></div>
+
+    <section class="card">
+      <h2>最新公告</h2>
+      <div id="announcements"></div>
+    </section>
+
+    <section class="card">
+      <h2>競賽項目與報名人數</h2>
+      <div class="table-wrap" id="events"></div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/common.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/index.js"></script>
+</body>
+</html>

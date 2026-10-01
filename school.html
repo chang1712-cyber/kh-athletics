@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>本校報名｜田徑錦標賽</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <div class="no-print">
+      <h1 id="title">本校報名</h1>
+      <div id="status" class="row" style="margin-bottom:12px"></div>
+    </div>
+
+    <div class="tabs">
+      <button data-tab="athletes">① 選手管理</button>
+      <button data-tab="register">② 項目報名</button>
+      <button data-tab="summary">③ 報名總覽與送出</button>
+    </div>
+
+    <section data-panel="athletes">
+      <div class="card">
+        <h2 id="athlete-form-title">新增選手</h2>
+        <form id="athlete-form" class="inline">
+          <input type="hidden" name="id">
+          <label>姓名<input name="name" required maxlength="20"></label>
+          <label>性別<select name="gender"><option value="M">男</option><option value="F">女</option></select></label>
+          <label>年級<select name="grade">
+            <option value="6">六年級</option><option value="5">五年級</option><option value="4">四年級</option>
+            <option value="3">三年級</option><option value="2">二年級</option><option value="1">一年級</option></select></label>
+          <label>學號（選填）<input name="student_no" maxlength="20"></label>
+          <button class="btn btn-primary" type="submit">儲存</button>
+          <button class="btn" type="reset" id="athlete-cancel">清除</button>
+        </form>
+      </div>
+      <details class="card">
+        <summary><strong>從 Excel 批次匯入</strong></summary>
+        <p class="muted small">在 Excel 依「姓名、性別、年級、學號」排好四欄，選取資料列後複製，貼到下方。性別填「男／女」，年級填數字 1～6。</p>
+        <textarea id="import-text" placeholder="王小明	男	6	110001&#10;陳小美	女	5	110002"></textarea>
+        <button class="btn btn-primary" id="import-btn" style="margin-top:8px">匯入</button>
+      </details>
+      <div class="card">
+        <h2>本校選手名單 <span class="muted small" id="athlete-count"></span></h2>
+        <div class="table-wrap" id="athlete-table"></div>
+      </div>
+    </section>
+
+    <section data-panel="register" hidden>
+      <p class="muted">勾選即報名、取消勾選即退報，系統會自動檢核年級、性別、每人限報項目數與每校每項人數上限。「—」表示該選手不符此項目資格。</p>
+      <div id="matrix"></div>
+    </section>
+
+    <section data-panel="summary" hidden>
+      <div class="card no-print">
+        <div class="row">
+          <div id="submit-status"></div>
+          <span class="spacer"></span>
+          <button class="btn" onclick="window.print()">列印報名表</button>
+          <button class="btn btn-primary" id="submit-btn">確認送出並鎖定</button>
+        </div>
+      </div>
+      <div class="card" id="summary"></div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/common.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/school.js"></script>
+</body>
+</html>

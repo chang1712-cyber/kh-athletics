@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>管理後台｜田徑錦標賽</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <h1>管理後台</h1>
+    <div class="tabs">
+      <button data-tab="overview">報名總表</button>
+      <button data-tab="comp">賽事設定</button>
+      <button data-tab="events">競賽項目</button>
+      <button data-tab="schools">學校與帳號</button>
+      <button data-tab="news">公告</button>
+    </div>
+
+    <section data-panel="overview">
+      <div class="card">
+        <div class="row"><h2 style="margin:0">各校報名狀況</h2><span class="spacer"></span>
+          <button class="btn" id="export-csv">匯出全部報名資料（CSV）</button></div>
+        <div class="table-wrap" id="school-overview" style="margin-top:12px"></div>
+      </div>
+      <div class="card">
+        <h2>各項目報名人數</h2>
+        <div class="table-wrap" id="event-overview"></div>
+      </div>
+    </section>
+
+    <section data-panel="comp" hidden>
+      <div class="card">
+        <form id="comp-form" style="display:grid;gap:12px;max-width:640px">
+          <input type="hidden" name="id">
+          <label>賽事名稱<input name="name" required></label>
+          <div class="row">
+            <label>開始日期<input type="date" name="start_date" required></label>
+            <label>結束日期<input type="date" name="end_date" required></label>
+          </div>
+          <label>比賽地點<input name="venue"></label>
+          <div class="row">
+            <label class="check"><input type="checkbox" name="registration_open"> 開放報名</label>
+            <label>報名截止時間<input type="datetime-local" name="registration_deadline" required></label>
+          </div>
+          <div class="row">
+            <label>每人限報個人項目數<input type="number" name="max_events_per_athlete" min="1" max="10" required></label>
+            <label>每校每項限報人數（預設）<input type="number" name="max_per_school" min="1" max="20" required></label>
+          </div>
+          <p class="muted small">接力項目不計入個人項目數；個別項目可在「競賽項目」中另設每校人數上限（例如接力 6 人含候補）。</p>
+          <div><button class="btn btn-primary" type="submit">儲存設定</button></div>
+        </form>
+      </div>
+    </section>
+
+    <section data-panel="events" hidden>
+      <div class="card">
+        <h2 id="event-form-title">新增項目</h2>
+        <form id="event-form" class="inline">
+          <input type="hidden" name="id">
+          <label>組別<input name="group_name" required placeholder="高年級" size="8"></label>
+          <label>性別<select name="gender"><option value="M">男</option><option value="F">女</option></select></label>
+          <label>項目名稱<input name="name" required placeholder="100公尺" size="12"></label>
+          <label>類別<select name="kind"><option value="track">徑賽</option><option value="field">田賽</option><option value="relay">接力</option></select></label>
+          <fieldset style="border:1px solid var(--border);border-radius:6px;padding:4px 10px">
+            <legend class="small muted">可報年級</legend>
+            <span id="grade-boxes" class="row"></span>
+          </fieldset>
+          <label>每校上限（空白=預設）<input type="number" name="max_per_school" min="1" max="20" style="width:90px"></label>
+          <label>排序<input type="number" name="sort" style="width:70px"></label>
+          <button class="btn btn-primary" type="submit">儲存</button>
+          <button class="btn" type="reset" id="event-cancel">清除</button>
+        </form>
+      </div>
+      <div class="card"><div class="table-wrap" id="event-table"></div></div>
+    </section>
+
+    <section data-panel="schools" hidden>
+      <div class="card">
+        <h2 id="school-form-title">新增學校</h2>
+        <form id="school-form" class="inline">
+          <input type="hidden" name="id">
+          <label>學校代碼<input name="code" required size="8"></label>
+          <label>校名<input name="name" required></label>
+          <label>行政區<input name="district" size="8"></label>
+          <button class="btn btn-primary" type="submit">儲存</button>
+          <button class="btn" type="reset" id="school-cancel">清除</button>
+        </form>
+      </div>
+      <div class="card"><h2>學校列表</h2><div class="table-wrap" id="school-table"></div></div>
+      <div class="card">
+        <h2>使用者帳號</h2>
+        <p class="muted small" id="account-help"></p>
+        <div class="table-wrap" id="profile-table"></div>
+      </div>
+    </section>
+
+    <section data-panel="news" hidden>
+      <div class="card">
+        <form id="news-form" style="display:grid;gap:10px">
+          <label>標題<input name="title" required></label>
+          <label>內容<textarea name="body" required></textarea></label>
+          <div><button class="btn btn-primary" type="submit">發布公告</button></div>
+        </form>
+      </div>
+      <div class="card" id="news-list"></div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/common.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/admin.js"></script>
+</body>
+</html>

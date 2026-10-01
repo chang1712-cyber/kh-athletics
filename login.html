@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>登入｜田徑錦標賽</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="wrap" style="max-width:520px">
+    <section class="card" id="real-login" hidden>
+      <h1>登入</h1>
+      <form id="login-form" style="display:flex;flex-direction:column;gap:12px">
+        <label>電子郵件<input type="email" name="email" required autocomplete="username"></label>
+        <label>密碼<input type="password" name="password" required autocomplete="current-password"></label>
+        <button class="btn btn-primary" type="submit">登入</button>
+      </form>
+      <p class="muted small">學校帳號由大會承辦人建立，忘記密碼請洽承辦人。</p>
+    </section>
+
+    <section class="card" id="demo-login" hidden>
+      <h1>示範模式登入</h1>
+      <p class="notice">目前尚未連接資料庫，資料只存在您的瀏覽器中，僅供試用。</p>
+      <h3>大會承辦人</h3>
+      <button class="btn btn-primary" id="demo-admin">以管理員身分進入後台</button>
+      <h3 style="margin-top:20px">學校承辦人</h3>
+      <div class="row">
+        <select id="demo-school"></select>
+        <button class="btn btn-primary" id="demo-school-go">以學校身分進入</button>
+      </div>
+      <hr style="margin:24px 0;border:0;border-top:1px solid var(--border)">
+      <button class="btn btn-danger btn-sm" id="demo-reset">重設示範資料</button>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/common.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/login.js"></script>
+</body>
+</html>
