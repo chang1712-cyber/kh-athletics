@@ -3,6 +3,8 @@
 純前端網站（HTML + JavaScript），部署在 **GitHub Pages**，資料庫與登入使用 **Supabase**。
 不需要安裝 Node.js 或任何建置工具。
 
+**開發者文件**：[系統架構](docs/ARCHITECTURE.md)｜[資料庫說明](docs/DATABASE.md)｜[開發規劃](docs/ROADMAP.md)｜[協作指南](CONTRIBUTING.md)
+
 ## 可行性評估
 
 | 項目 | 評估 | 說明 |
