@@ -44,9 +44,17 @@
 | 4 | 成績分析儀表板（個人歷程、各校／行政區比較、歷年趨勢） |
 | 5 | 組訓：培訓名單、集訓出缺席、體能測驗追蹤 |
 
+## 目前部署狀態
+
+- 網站：https://chang1712-cyber.github.io/kh-athletics/
+- Supabase 專案：`kh-athletics`（Tokyo，ref `oizdjapqsfvigbfxtfqb`），已執行 `schema.sql` 與 `seed.sql`
+- 已關閉公開註冊；Site URL 設為 `set-password.html`（邀請信與重設密碼信會導到該頁設定密碼）
+
+**新增帳號**：Supabase → Authentication → Users → **Invite user** 輸入 Email → 對方收信點連結設定密碼 → 在網站「管理後台 › 學校與帳號」指定角色與學校。
+
 ## 本機試用（示範模式）
 
-`js/config.js` 未填 Supabase 資料時會自動進入**示範模式**，資料存在瀏覽器裡，可完整試用所有功能。
+`js/config.js` 的 Supabase 欄位留空時會自動進入**示範模式**，資料存在瀏覽器裡，可完整試用所有功能。
 
 ```bash
 powershell -ExecutionPolicy Bypass -File tools\serve.ps1

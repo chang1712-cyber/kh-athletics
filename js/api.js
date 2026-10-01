@@ -251,6 +251,20 @@ window.App = window.App || {};
       },
       signInDemo: () => Promise.reject(new Error('正式模式不提供示範帳號')),
       signOut: () => sb.auth.signOut(),
+      // 邀請信、重設密碼信的連結會帶登入憑證回到 set-password.html
+      async hasAuthUser() {
+        const { data } = await sb.auth.getSession();
+        return data.session ? data.session.user.email : null;
+      },
+      async updatePassword(password) {
+        const { error } = await sb.auth.updateUser({ password });
+        if (error) throw new Error(error.message);
+      },
+      async requestPasswordReset(email) {
+        const redirectTo = new URL('set-password.html', location.href).href;
+        const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo });
+        if (error) throw new Error(error.message);
+      },
 
       getActiveCompetition: () => run(sb.from('competitions').select('*').eq('is_active', true)
         .order('start_date', { ascending: false }).limit(1).maybeSingle()),

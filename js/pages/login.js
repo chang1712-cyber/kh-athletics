@@ -23,6 +23,15 @@
   }
 
   $('#real-login').hidden = false;
+  $('#forgot').onclick = async ev => {
+    ev.preventDefault();
+    const email = $('#login-form').elements.email.value.trim();
+    if (!email) return App.toast('請先在上方輸入您的電子郵件', 'error');
+    try {
+      await api.requestPasswordReset(email);
+      App.toast('若此帳號存在，重設密碼信已寄出，請檢查信箱', 'ok');
+    } catch (e) { App.toast(App.errMsg(e), 'error'); }
+  };
   $('#login-form').onsubmit = async ev => {
     ev.preventDefault();
     const btn = ev.target.querySelector('button');
